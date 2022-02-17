@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,22 +14,24 @@ class AuthController {
     return auth.userChanges();
   }
 
-  void signup(BuildContext context, String email, String password) async {
+  void signup(
+    BuildContext context,
+    String name,
+    String phoneNumber,
+    String email,
+    String password,
+  ) async {
     try {
-      UserCredential result = await auth.createUserWithEmailAndPassword(
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      User? user = result.user;
+      User user = userCredential.user!;
 
-      user!.updateDisplayName("Fawaz");
-
-      // User? user = FirebaseAuth.instance.currentUser;
-
-      // if (user != null && !user.emailVerified) {
-      //   await user.sendEmailVerification();
-      // }
+      await user.sendEmailVerification();
+      user.updateDisplayName(name);
+      _saveUserDataToFirestore(user, name, phoneNumber);
 
       Navigator.of(context).pushNamedAndRemoveUntil(
         Routes.login,
@@ -45,14 +48,32 @@ class AuthController {
     }
   }
 
+  void _saveUserDataToFirestore(
+    User currentUser,
+    String name,
+    String phoneNumber,
+  ) {
+    final User? user = currentUser;
+
+    final CollectionReference<Map<String, dynamic>> usersRef =
+        FirebaseFirestore.instance.collection('users');
+    usersRef.doc(user?.uid).set({
+      'id': user?.uid,
+      'displayName': name,
+      'phoneNumber': phoneNumber,
+      'email': user?.email,
+      // 'createdAt': documentIdFromCurrentDate(),
+    });
+  }
+
   void signin(BuildContext context, String email, String password) async {
     try {
-      UserCredential result = await auth.signInWithEmailAndPassword(
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      User? user = result.user;
+      User? user = userCredential.user;
 
       if (user != null && user.emailVerified) {
         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -66,7 +87,7 @@ class AuthController {
         );
 
         if (user != null && !user.emailVerified) {
-          result.user!.sendEmailVerification();
+          userCredential.user!.sendEmailVerification();
         }
       }
     } on FirebaseAuthException catch (e) {

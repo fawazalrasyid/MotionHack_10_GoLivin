@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:app/constants/colors.dart';
 import 'package:flutter/material.dart';
+import '../../constants/assets.dart';
+import '../../constants/fonts.dart';
 import '../../utils/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -52,18 +55,18 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           SizedBox(height: 20.0),
           Container(
-            // child: Image.asset('assets/images/rise.png'),
-            width: 150,
-            height: 150,
-            color: Colors.amber,
-            margin: EdgeInsets.symmetric(horizontal: 120),
+            child: Image.asset(Assets.appLogoSplash),
+            margin: EdgeInsets.symmetric(horizontal: 100),
           ),
           Container(
-            padding: EdgeInsets.only(bottom: 20.0),
+            padding: EdgeInsets.only(bottom: 32),
             child: Text(
-              "0.1.1-beta",
+              "0.0.1-beta",
               textAlign: TextAlign.center,
-              // style: styleRegular.copyWith(color: kOnBackground, fontSize: 14.0),
+              style: FontFamily.regular.copyWith(
+                color: AppColors.text,
+                fontSize: 14.0,
+              ),
             ),
           ),
         ],
