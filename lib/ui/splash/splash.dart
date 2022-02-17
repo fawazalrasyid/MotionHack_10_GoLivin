@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Timer(
         Duration(seconds: 3),
         () => Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home,
+          Routes.index,
           (Route<dynamic> route) => false,
         ),
       );
@@ -40,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Timer(
         Duration(seconds: 3),
         () => Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.login,
+          Routes.index,
           (Route<dynamic> route) => false,
         ),
       );

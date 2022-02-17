@@ -38,30 +38,31 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDqBPXiPexy-sYfwFnLaq8IBvrfnO4ePwY',
-    appId: '1:186598973704:web:52483f84c4ff8e0b47ccbd',
-    messagingSenderId: '186598973704',
-    projectId: 'golivin-170222',
-    authDomain: 'golivin-170222.firebaseapp.com',
-    storageBucket: 'golivin-170222.appspot.com',
-    measurementId: 'G-2MLVPVPQZD',
+    apiKey: 'AIzaSyAsAhaRMEV0O0aNHOOXVVrZrhqmQ14Olkg',
+    appId: '1:237831475435:web:4052066e4f52d8949d2eae',
+    messagingSenderId: '237831475435',
+    projectId: 'golivin-id',
+    authDomain: 'golivin-id.firebaseapp.com',
+    storageBucket: 'golivin-id.appspot.com',
+    measurementId: 'G-RT54G7H4W0',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCFT2xeVN7X1FLTj_awzAMIFpjic20OgY8',
-    appId: '1:186598973704:android:924ecd92c33fbaed47ccbd',
-    messagingSenderId: '186598973704',
-    projectId: 'golivin-170222',
-    storageBucket: 'golivin-170222.appspot.com',
+    apiKey: 'AIzaSyBH6wxu_iVffVKaqTuIgidNuowBgAXapHY',
+    appId: '1:237831475435:android:1accfdf265c270fe9d2eae',
+    messagingSenderId: '237831475435',
+    projectId: 'golivin-id',
+    storageBucket: 'golivin-id.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBGZm6ZsUTt5n-tsc0KqF-n6GTMuuKct6A',
-    appId: '1:186598973704:ios:55625e797a1cc7ff47ccbd',
-    messagingSenderId: '186598973704',
-    projectId: 'golivin-170222',
-    storageBucket: 'golivin-170222.appspot.com',
-    iosClientId: '186598973704-405olbgm197nnekr4d4mnknnk32ulput.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAXfx5F2OQaYM2_35sUMf3xQm6n1Bwnqc0',
+    appId: '1:237831475435:ios:02ab2e846679b2859d2eae',
+    messagingSenderId: '237831475435',
+    projectId: 'golivin-id',
+    storageBucket: 'golivin-id.appspot.com',
+    iosClientId:
+        '237831475435-15lbjs1pcs63j8l5j2c3vs9qhp9a6v74.apps.googleusercontent.com',
     iosBundleId: 'com.golivin.app',
   );
 }

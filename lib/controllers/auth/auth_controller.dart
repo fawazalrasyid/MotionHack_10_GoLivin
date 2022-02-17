@@ -27,11 +27,16 @@ class AuthController {
         password: password,
       );
 
-      User user = userCredential.user!;
+      User? user = userCredential.user;
 
-      await user.sendEmailVerification();
-      user.updateDisplayName(name);
-      _saveUserDataToFirestore(user, name, phoneNumber);
+      if (user != null) {
+        await user.updateDisplayName(name);
+
+        await user.sendEmailVerification();
+
+        // save current userData to firestore
+        _saveUserDataToFirestore(user, name, phoneNumber);
+      }
 
       Navigator.of(context).pushNamedAndRemoveUntil(
         Routes.login,
@@ -77,12 +82,12 @@ class AuthController {
 
       if (user != null && user.emailVerified) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home,
+          Routes.index,
           (Route<dynamic> route) => false,
         );
       } else {
         Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home,
+          Routes.index,
           (Route<dynamic> route) => false,
         );
 

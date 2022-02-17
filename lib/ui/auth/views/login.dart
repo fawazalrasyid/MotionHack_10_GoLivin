@@ -62,114 +62,115 @@ class _LoginScreenState extends State<LoginScreen> {
                 key: controller.formKey,
                 autovalidateMode: _autoValidate,
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        controller: controller.emailC,
-                        validator: (value) => FormValidator.validateEmail(
-                          value.toString(),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: controller.emailC,
+                      validator: (value) => FormValidator.validateEmail(
+                        value.toString(),
+                      ),
+                      style: FontFamily.regular.copyWith(
+                        color: AppColors.text,
+                        fontSize: 16,
+                      ),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        style: FontFamily.regular.copyWith(
-                          color: AppColors.text,
+                        contentPadding: EdgeInsets.all(14),
+                        hintText: "Email",
+                        hintStyle: FontFamily.regular.copyWith(
+                          color: AppColors.hintText,
                           fontSize: 16,
                         ),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          contentPadding: EdgeInsets.all(14),
-                          hintText: "Email",
-                          hintStyle: FontFamily.regular.copyWith(
-                            color: AppColors.hintText,
-                            fontSize: 16,
-                          ),
-                          hoverColor: AppColors.formOutline,
-                          fillColor: AppColors.formOutlineActive,
-                        ),
+                        hoverColor: AppColors.formOutline,
+                        fillColor: AppColors.formOutlineActive,
                       ),
-                      SizedBox(height: 24),
-                      TextFormField(
-                        keyboardType: TextInputType.visiblePassword,
-                        controller: controller.passC,
-                        obscureText: _securePass,
-                        validator: (value) => FormValidator.validatePassword(
-                          value.toString(),
+                    ),
+                    SizedBox(height: 24),
+                    TextFormField(
+                      keyboardType: TextInputType.visiblePassword,
+                      controller: controller.passC,
+                      obscureText: _securePass,
+                      validator: (value) => FormValidator.validatePassword(
+                        value.toString(),
+                      ),
+                      style: FontFamily.regular.copyWith(
+                        color: AppColors.text,
+                        fontSize: 16,
+                      ),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        style: FontFamily.regular.copyWith(
-                          color: AppColors.text,
+                        contentPadding: EdgeInsets.all(14),
+                        hintText: "Password",
+                        hintStyle: FontFamily.regular.copyWith(
+                          color: AppColors.hintText,
                           fontSize: 16,
                         ),
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _securePass
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: AppColors.icon,
+                          ),
+                          onPressed: toggleObscurePass,
+                        ),
+                        hoverColor: AppColors.formOutline,
+                        fillColor: AppColors.formOutlineActive,
+                      ),
+                    ),
+                    SizedBox(height: 64),
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: TextButton(
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.all(12),
+                          backgroundColor: AppColors.buttonActive,
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          contentPadding: EdgeInsets.all(14),
-                          hintText: "Password",
-                          hintStyle: FontFamily.regular.copyWith(
-                            color: AppColors.hintText,
-                            fontSize: 16,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _securePass
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: AppColors.icon,
-                            ),
-                            onPressed: toggleObscurePass,
-                          ),
-                          hoverColor: AppColors.formOutline,
-                          fillColor: AppColors.formOutlineActive,
                         ),
-                      ),
-                      SizedBox(height: 64),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: TextButton(
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.all(12),
-                            backgroundColor: AppColors.buttonActive,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                        child: Text(
+                          "Login",
+                          style: FontFamily.semiBold.copyWith(
+                            color: AppColors.textOnBg,
+                            fontSize: 18,
                           ),
+                        ),
+                        onPressed: () => _doLogin(),
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account?",
+                          style: FontFamily.regular.copyWith(
+                            color: AppColors.text,
+                            fontSize: 14,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () =>
+                              Navigator.pushNamed(context, Routes.register),
                           child: Text(
-                            "Login",
-                            style: FontFamily.semiBold.copyWith(
-                              color: AppColors.textOnBg,
-                              fontSize: 18,
-                            ),
-                          ),
-                          onPressed: () => _doLogin(),
-                        ),
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "Don't have an account?",
-                            style: FontFamily.regular.copyWith(
-                              color: AppColors.text,
+                            "Register",
+                            style: FontFamily.medium.copyWith(
+                              color: AppColors.linkText,
                               fontSize: 14,
                             ),
                           ),
-                          TextButton(
-                            onPressed: () =>
-                                Navigator.pushNamed(context, Routes.register),
-                            child: Text(
-                              "Register",
-                              style: FontFamily.medium.copyWith(
-                                color: AppColors.linkText,
-                                fontSize: 14,
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ]),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ],
           ),
