@@ -9,7 +9,9 @@ class AppColors {
   static final darkPrimary = Color(0xFF16558F); // Primary Dark Color
 
   // General Color
+  static final bleuchatel = Color(0xFF3F8DFD);
   static final skyBlue = Color(0xFF73B2FF);
+  static final spandexGreen = Color(0xFF37B54F);
   static final silverCity = Color(0xFFE2E4EA);
 
   // BottomNavBar Color

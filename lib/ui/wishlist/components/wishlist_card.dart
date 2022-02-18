@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-Container recommendationCard(
+Container wishlistCard(
   String name,
   String location,
   String price,
@@ -16,11 +16,11 @@ Container recommendationCard(
     margin: EdgeInsets.only(
       bottom: 24,
     ),
-    height: 120,
+    height: 130,
     child: Row(
       children: [
         CachedNetworkImage(
-          height: 120,
+          height: 130,
           width: 110,
           imageUrl: image,
           imageBuilder: (context, imageProvider) => Container(
@@ -38,12 +38,12 @@ Container recommendationCard(
         Expanded(
           child: Container(
             margin: EdgeInsets.only(left: 16, top: 4, bottom: 4),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  child: Column(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -66,35 +66,64 @@ Container recommendationCard(
                               color: AppColors.greyText,
                             ),
                           ),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                AppIcons.star,
+                                height: 16,
+                                color: AppColors.iconYellow,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                rating,
+                                style: FontFamily.medium.copyWith(
+                                  fontSize: 14,
+                                  color: AppColors.text,
+                                ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                      Text(
-                        price,
-                        style: FontFamily.medium.copyWith(
-                          fontSize: 16,
-                          color: AppColors.blueText,
-                        ),
+                      SvgPicture.asset(
+                        AppIcons.bookmark,
+                        height: 20,
+                        color: AppColors.iconGrey,
                       ),
                     ],
                   ),
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SvgPicture.asset(
-                      AppIcons.star,
-                      height: 16,
-                      color: AppColors.iconYellow,
-                    ),
-                    SizedBox(width: 4),
                     Text(
-                      rating,
+                      price,
                       style: FontFamily.medium.copyWith(
-                        fontSize: 14,
-                        color: AppColors.text,
+                        fontSize: 16,
+                        color: AppColors.blueText,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Book",
+                        style: FontFamily.medium.copyWith(
+                          color: AppColors.textOnBg,
+                          fontSize: 12,
+                        ),
+                      ),
+                      style: TextButton.styleFrom(
+                        backgroundColor: AppColors.bleuchatel,
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(18),
+                          ),
+                        ),
                       ),
                     ),
                   ],
-                ),
+                )
               ],
             ),
           ),
