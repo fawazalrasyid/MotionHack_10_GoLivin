@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:app/constants/colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../constants/assets.dart';
 import '../../constants/fonts.dart';
+import '../../controllers/auth/user_controller.dart';
 import '../../utils/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -12,7 +14,7 @@ class SplashScreen extends StatefulWidget {
     required this.userSnapshot,
   }) : super(key: key);
 
-  final userSnapshot;
+  final AsyncSnapshot<User?> userSnapshot;
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -32,7 +34,15 @@ class _SplashScreenState extends State<SplashScreen> {
       Timer(
         Duration(seconds: 3),
         () => Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home,
+          Routes.index,
+          (Route<dynamic> route) => false,
+        ),
+      );
+    } else if (userSnapshot.data != null) {
+      Timer(
+        Duration(seconds: 3),
+        () => Navigator.of(context).pushNamedAndRemoveUntil(
+          Routes.login,
           (Route<dynamic> route) => false,
         ),
       );
@@ -49,6 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userSnapshot = widget.userSnapshot;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,16 +69,25 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Image.asset(Assets.appLogoSplash),
             margin: EdgeInsets.symmetric(horizontal: 100),
           ),
-          Container(
-            padding: EdgeInsets.only(bottom: 32),
-            child: Text(
-              "0.0.1-beta",
-              textAlign: TextAlign.center,
-              style: FontFamily.regular.copyWith(
-                color: AppColors.text,
-                fontSize: 14.0,
+          Column(
+            children: [
+              if (userSnapshot.connectionState == ConnectionState.waiting)
+                Container(
+                  padding: EdgeInsets.only(bottom: 32),
+                  child: CircularProgressIndicator(),
+                ),
+              Container(
+                padding: EdgeInsets.only(bottom: 32),
+                child: Text(
+                  "0.0.1-beta",
+                  textAlign: TextAlign.center,
+                  style: FontFamily.regular.copyWith(
+                    color: AppColors.text,
+                    fontSize: 14.0,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

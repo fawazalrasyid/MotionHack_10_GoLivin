@@ -1,3 +1,4 @@
+import 'package:app/controllers/auth/user_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -27,11 +28,16 @@ class AuthController {
         password: password,
       );
 
-      User user = userCredential.user!;
+      User? user = userCredential.user;
 
-      await user.sendEmailVerification();
-      user.updateDisplayName(name);
-      _saveUserDataToFirestore(user, name, phoneNumber);
+      if (user != null) {
+        await user.updateDisplayName(name);
+
+        await user.sendEmailVerification();
+
+        // save current userData to firestore
+        _saveUserDataToFirestore(user, name, phoneNumber);
+      }
 
       Navigator.of(context).pushNamedAndRemoveUntil(
         Routes.login,
@@ -62,7 +68,7 @@ class AuthController {
       'displayName': name,
       'phoneNumber': phoneNumber,
       'email': user?.email,
-      // 'createdAt': documentIdFromCurrentDate(),
+      'createdAt': user?.metadata.creationTime,
     });
   }
 
@@ -77,18 +83,14 @@ class AuthController {
 
       if (user != null && user.emailVerified) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home,
+          Routes.index,
           (Route<dynamic> route) => false,
         );
-      } else {
+      } else if (user != null) {
         Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.home,
+          Routes.index,
           (Route<dynamic> route) => false,
         );
-
-        if (user != null && !user.emailVerified) {
-          userCredential.user!.sendEmailVerification();
-        }
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -101,6 +103,7 @@ class AuthController {
 
   void signout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
+
     Navigator.of(context).pushNamedAndRemoveUntil(
       Routes.login,
       (Route<dynamic> route) => false,

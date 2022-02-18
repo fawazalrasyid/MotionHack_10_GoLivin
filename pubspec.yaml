@@ -31,6 +31,9 @@ dependencies:
   firebase_analytics: ^9.1.0
   firebase_auth: ^3.3.7
   cloud_firestore: ^3.1.8
+  easy_firebase_auth: ^3.2.0
+  flutter_svg: ^1.0.3
+  cached_network_image: ^3.2.0
 
   flutter:
     sdk: flutter
@@ -66,7 +69,10 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - assets/icons/
+    - assets/icons/bold/
+    - assets/icons/outline/
+    - assets/logo/
+    - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

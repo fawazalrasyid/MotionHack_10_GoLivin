@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:app/firebase_options.dart';
 import 'package:app/ui/my_app.dart';
 import 'package:firebase_core/firebase_core.dart';
