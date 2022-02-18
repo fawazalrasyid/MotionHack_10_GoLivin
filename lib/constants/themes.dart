@@ -2,29 +2,23 @@ import 'package:app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 final ThemeData themeData = ThemeData(
-  // fontFamily: FontFamily.poppins,
-  // brightness: Brightness.light,
-  // primaryColor: AppColors.mediumGreen,
   appBarTheme: AppBarTheme(
     backgroundColor: AppColors.primary,
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(
     primary: AppColors.primary,
-    secondary: AppColors.accent,
+    secondary: AppColors.secondary,
     brightness: Brightness.light,
   ),
 );
 
 final ThemeData themeDataDark = ThemeData(
-  // fontFamily: FontFamily.poppins,
-  // brightness: Brightness.dark,
-  // primaryColor: AppColors.mediumGreen,
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.mediumGreen,
+    backgroundColor: AppColors.primary,
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(
-    primary: AppColors.mediumGreen,
-    secondary: AppColors.green,
+    primary: AppColors.primary,
+    secondary: AppColors.secondary,
     brightness: Brightness.dark,
   ),
 );

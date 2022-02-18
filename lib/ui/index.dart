@@ -1,5 +1,7 @@
 import 'package:app/constants/icons.dart';
+import 'package:app/ui/order/views/my_order.dart';
 import 'package:app/ui/profile/views/profile.dart';
+import 'package:app/ui/wishlist/views/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -27,8 +29,8 @@ class _IndexScreenState extends State<IndexScreen> {
         index: _selectedIndex,
         children: <Widget>[
           HomeScreen(),
-          ProfileScreen(),
-          ProfileScreen(),
+          MyOrderScreen(),
+          WishlistScreen(),
           ProfileScreen(),
         ],
       ),

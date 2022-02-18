@@ -1,12 +1,17 @@
 import 'package:app/constants/icons.dart';
+import 'package:app/models/building.dart';
+import 'package:app/ui/home/components/recommendation_card.dart';
 import 'package:app/ui/home/components/nearby_card.dart';
-import 'package:app/ui/home/components/popular_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/fonts.dart';
 import '../../../controllers/auth/auth_controller.dart';
+import '../../../controllers/auth/user_controller.dart';
+import '../../../controllers/building/nearby_controller.dart';
+import '../../../controllers/building/recommendation_controller.dart';
+import '../../../models/user.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -14,9 +19,43 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // User? user = userCredential.user;
-
   final authC = AuthController();
+  final userC = UserController();
+  final nearbyC = NearbyController();
+  final recommendationC = RecommendationController();
+
+  UserM? user;
+  List<Building?> nearbyBuilding = List<Building>.empty(growable: true);
+  List<Building?> recommendationBuilding = List<Building>.empty(growable: true);
+
+  @override
+  void initState() {
+    getCurrentUserData();
+    getNearbyBuildingData();
+    getRocommendationBuildingData();
+    super.initState();
+  }
+
+  void getCurrentUserData() async {
+    final res = await userC.getCurrentUser();
+    setState(() {
+      user = res;
+    });
+  }
+
+  void getNearbyBuildingData() async {
+    final res = await nearbyC.getNearbyBuilding();
+    setState(() {
+      nearbyBuilding = res;
+    });
+  }
+
+  void getRocommendationBuildingData() async {
+    final res = await recommendationC.getRecommendationBuilding();
+    setState(() {
+      recommendationBuilding = res;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +76,64 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 24),
               buildTextSection("Nearby"),
               SizedBox(height: 16),
-              buildRecommendationList(),
+              buildNearbyList(),
               SizedBox(height: 24),
               buildTextSection("Recommendation"),
               SizedBox(height: 16),
-              buildNearbyList()
+              buildRecommendationList(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Container buildTextSection(String title) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 24),
+      child: Text(
+        title,
+        style: FontFamily.semiBold.copyWith(
+          color: AppColors.text,
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
+
+  Container buildProfile() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "Hello, ${user?.displayName}!",
+            style: FontFamily.medium.copyWith(
+              color: AppColors.greyText,
+              fontSize: 18,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              AppIcons.notifiaction,
+              color: AppColors.iconGrey,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container buildHeader() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 24),
+      child: Text(
+        "Where do you want\nto go?",
+        style: FontFamily.bold.copyWith(
+          color: AppColors.text,
+          fontSize: 24,
         ),
       ),
     );
@@ -71,75 +161,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Container buildRecommendationList() {
-    return Container(
-      height: 150,
-      child: ListView(
-        padding: EdgeInsets.zero,
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        children: [
-          popularCard(
-            "Kost Mantap",
-            "Bandung",
-            "IDR 299.000.month",
-            "4.9",
-            "https://images.unsplash.com/photo-1570586254197-d58a4a0fa274?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80",
-          ),
-          popularCard(
-            "Kost Keren",
-            "Jakarta",
-            "IDR 299.000/monts",
-            "4.7",
-            "https://images.unsplash.com/photo-1506126279646-a697353d3166?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-          ),
-          popularCard(
-            "Kost Keren",
-            "Jakarta",
-            "IDR 299.000/monts",
-            "4.9",
-            "https://images.unsplash.com/photo-1506126279646-a697353d3166?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-          )
-        ],
-      ),
-    );
-  }
-
-  Container buildNearbyList() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24),
-      child: ListView(
-        padding: EdgeInsets.zero,
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        children: [
-          nearbyCard(
-            "Kost Mantap",
-            "Bandung",
-            "IDR 299.000",
-            "4.8",
-            "https://images.unsplash.com/photo-1570586254197-d58a4a0fa274?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80",
-          ),
-          nearbyCard(
-            "Kost Keren",
-            "Jakarta",
-            "IDR 299.000",
-            "4.8",
-            "https://images.unsplash.com/photo-1506126279646-a697353d3166?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-          ),
-          nearbyCard(
-            "Kost Mantul",
-            "Jakarta",
-            "IDR 299.000",
-            "4.9",
-            "https://images.unsplash.com/photo-1506126279646-a697353d3166?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-          )
-        ],
-      ),
-    );
-  }
-
   Container buildOption() {
     return Container(
       child: Row(
@@ -156,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               style: TextButton.styleFrom(
-                backgroundColor: AppColors.grey,
+                backgroundColor: AppColors.silverCity,
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -179,7 +200,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               style: TextButton.styleFrom(
-                backgroundColor: AppColors.grey,
+                backgroundColor: AppColors.silverCity,
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -202,7 +223,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               style: TextButton.styleFrom(
-                backgroundColor: AppColors.grey,
+                backgroundColor: AppColors.silverCity,
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(
@@ -218,53 +239,45 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Container buildTextSection(String title) {
+  Container buildNearbyList() {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24),
-      child: Text(
-        title,
-        style: FontFamily.semiBold.copyWith(
-          color: AppColors.text,
-          fontSize: 18,
-        ),
+      height: 150,
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: nearbyBuilding.length,
+        itemBuilder: (context, index) {
+          return nearbyCard(
+            "${nearbyBuilding[index]?.buildingName}",
+            "${nearbyBuilding[index]?.city}",
+            "IDR ${nearbyBuilding[index]?.price}",
+            "${nearbyBuilding[index]?.rating}",
+            "${nearbyBuilding[index]?.imgThumbnail}",
+          );
+        },
       ),
     );
   }
 
-  Container buildHeader() {
+  Container buildRecommendationList() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24),
-      child: Text(
-        "Where do you want\nto go?",
-        style: FontFamily.bold.copyWith(
-          color: AppColors.text,
-          fontSize: 24,
-        ),
-      ),
-    );
-  }
-
-  Container buildProfile() {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            "Hello, Faww!",
-            style: FontFamily.medium.copyWith(
-              color: AppColors.greyText,
-              fontSize: 18,
-            ),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              AppIcons.notifiaction,
-              color: AppColors.iconGrey,
-            ),
-          )
-        ],
+      child: ListView.builder(
+        padding: EdgeInsets.zero,
+        physics: BouncingScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: recommendationBuilding.length,
+        itemBuilder: (context, index) {
+          return recommendationCard(
+            "${recommendationBuilding[index]?.buildingName}",
+            "${recommendationBuilding[index]?.city}",
+            "IDR ${recommendationBuilding[index]?.price}",
+            "${recommendationBuilding[index]?.rating}",
+            "${recommendationBuilding[index]?.imgThumbnail}",
+          );
+        },
       ),
     );
   }

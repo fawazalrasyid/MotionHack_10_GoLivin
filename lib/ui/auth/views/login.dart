@@ -130,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: TextButton(
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.all(12),
-                          backgroundColor: AppColors.buttonActive,
+                          backgroundColor: AppColors.button,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),

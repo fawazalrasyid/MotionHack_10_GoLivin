@@ -14,14 +14,15 @@ Container nearbyCard(
 ) {
   return Container(
     margin: EdgeInsets.only(
-      bottom: 24,
+      left: 24,
     ),
-    height: 120,
-    child: Row(
+    height: 100,
+    width: 280,
+    child: Stack(
       children: [
         CachedNetworkImage(
-          height: 130,
-          width: 110,
+          height: 150,
+          width: 280,
           imageUrl: image,
           imageBuilder: (context, imageProvider) => Container(
             decoration: BoxDecoration(
@@ -35,64 +36,78 @@ Container nearbyCard(
             ),
           ),
         ),
-        Expanded(
-          child: Container(
-            margin: EdgeInsets.only(left: 16, top: 4, bottom: 4),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          name,
-                          style: FontFamily.medium.copyWith(
-                            fontSize: 16,
-                            color: AppColors.text,
-                          ),
-                        ),
-                        Text(
-                          location,
-                          style: FontFamily.regular.copyWith(
-                            fontSize: 14,
-                            color: AppColors.greyText,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      price,
-                      style: FontFamily.medium.copyWith(
-                        fontSize: 16,
-                        color: AppColors.blueText,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      AppIcons.star,
-                      height: 16,
-                      color: AppColors.iconYellow,
-                    ),
-                    SizedBox(width: 4),
-                    Text(
-                      rating,
-                      style: FontFamily.medium.copyWith(
-                        fontSize: 14,
-                        color: AppColors.text,
-                      ),
-                    ),
-                  ],
-                ),
+        Container(
+          height: 150.0,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(
+              Radius.circular(12),
+            ),
+            gradient: LinearGradient(
+              begin: FractionalOffset.topCenter,
+              end: FractionalOffset.bottomCenter,
+              colors: [
+                Colors.grey.withOpacity(0.0),
+                Colors.black.withOpacity(0.8),
               ],
             ),
+          ),
+        ),
+        Container(
+          alignment: Alignment.bottomLeft,
+          margin: EdgeInsets.all(14),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: FontFamily.regular.copyWith(
+                      fontSize: 14,
+                      color: AppColors.textOnBg,
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        AppIcons.location,
+                        height: 16,
+                        color: AppColors.iconWhite,
+                      ),
+                      SizedBox(width: 4),
+                      Text(
+                        location,
+                        style: FontFamily.medium.copyWith(
+                          fontSize: 16,
+                          color: AppColors.textOnBg,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    AppIcons.star,
+                    height: 16,
+                    color: AppColors.iconYellow,
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    rating,
+                    style: FontFamily.medium.copyWith(
+                      fontSize: 14,
+                      color: AppColors.textOnBg,
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ],

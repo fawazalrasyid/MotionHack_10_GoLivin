@@ -1,4 +1,5 @@
 import 'package:app/ui/splash/splash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/strings.dart';
@@ -11,10 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<User?>(
       stream: authC.streamAuthStatus(),
       builder: (context, snapshot) {
-        print(snapshot.data);
+        // print(snapshot.data);
+        // if (snapshot.connectionState == ConnectionState.active) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: Strings.appName,
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
             userSnapshot: snapshot,
           ),
         );
+        // }
+        // return CircularProgressIndicator();
       },
     );
   }
