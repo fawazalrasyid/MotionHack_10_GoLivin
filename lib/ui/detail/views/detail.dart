@@ -1,8 +1,8 @@
-import 'package:app/constants/assets.dart';
-import 'package:app/ui/gallery/views/gallery.dart';
-import 'package:app/ui/payment/views/confirm_booking.dart';
-import 'package:app/widgets/photo_view/panorama_viewer.dart';
-import 'package:app/widgets/photo_view/photo_viewer.dart';
+import 'package:golivin/constants/assets.dart';
+import 'package:golivin/ui/gallery/views/gallery.dart';
+import 'package:golivin/ui/payment/views/confirm_booking.dart';
+import 'package:golivin/widgets/photo_view/panorama_viewer.dart';
+import 'package:golivin/widgets/photo_view/photo_viewer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

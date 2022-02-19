@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import 'package:app/constants/colors.dart';
+import 'package:golivin/constants/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../constants/assets.dart';
 import '../../constants/fonts.dart';
+import '../../constants/strings.dart';
 import '../../utils/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -78,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Container(
                 padding: EdgeInsets.only(bottom: 32),
                 child: Text(
-                  "0.0.1-beta",
+                  AppStrings.appVersion,
                   textAlign: TextAlign.center,
                   style: FontFamily.regular.copyWith(
                     color: AppColors.text,

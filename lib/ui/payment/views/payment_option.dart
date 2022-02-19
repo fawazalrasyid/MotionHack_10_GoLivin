@@ -1,4 +1,4 @@
-import 'package:app/ui/payment/views/payment_success.dart';
+import 'package:golivin/ui/payment/views/payment_success.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

@@ -1,4 +1,4 @@
-import 'package:app/ui/splash/splash.dart';
+import 'package:golivin/ui/splash/splash.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,24 +17,24 @@ class MyApp extends StatelessWidget {
       stream: authC.streamAuthStatus(),
       builder: (context, snapshot) {
         // print(snapshot.data);
-        // if (snapshot.connectionState == ConnectionState.active) {
-        SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(
-            statusBarBrightness: Brightness.light,
-          ),
-        );
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: Strings.appName,
-          themeMode: ThemeMode.light,
-          theme: themeData,
-          routes: Routes.routes,
-          home: SplashScreen(
-            userSnapshot: snapshot,
-          ),
-        );
-        // }
-        // return CircularProgressIndicator();
+        if (snapshot.connectionState == ConnectionState.active) {
+          SystemChrome.setSystemUIOverlayStyle(
+            SystemUiOverlayStyle(
+              statusBarBrightness: Brightness.light,
+            ),
+          );
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: AppStrings.appName,
+            themeMode: ThemeMode.light,
+            theme: themeData,
+            routes: Routes.routes,
+            home: SplashScreen(
+              userSnapshot: snapshot,
+            ),
+          );
+        }
+        return CircularProgressIndicator();
       },
     );
   }

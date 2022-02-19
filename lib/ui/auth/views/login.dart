@@ -1,4 +1,4 @@
-import 'package:app/utils/validators/form_validator.dart';
+import 'package:golivin/utils/validators/form_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/assets.dart';

@@ -1,9 +1,9 @@
-import 'package:app/constants/icons.dart';
-import 'package:app/models/building.dart';
-import 'package:app/ui/building/views/list_building.dart';
-import 'package:app/ui/detail/views/detail.dart';
-import 'package:app/ui/home/components/recommendation_card.dart';
-import 'package:app/ui/home/components/nearby_card.dart';
+import 'package:golivin/constants/icons.dart';
+import 'package:golivin/models/building.dart';
+import 'package:golivin/ui/building/views/list_building.dart';
+import 'package:golivin/ui/detail/views/detail.dart';
+import 'package:golivin/ui/home/components/recommendation_card.dart';
+import 'package:golivin/ui/home/components/nearby_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

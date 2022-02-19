@@ -1,8 +1,8 @@
-import 'package:app/constants/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:panorama/panorama.dart';
 
+import '../../constants/assets.dart';
 import '../../constants/colors.dart';
 import '../../constants/icons.dart';
 

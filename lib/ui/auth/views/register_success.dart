@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app/constants/lottie.dart';
+import 'package:golivin/constants/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 

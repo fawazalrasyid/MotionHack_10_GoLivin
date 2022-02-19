@@ -21,6 +21,10 @@ class AppIcons {
   static const String location_outline = "assets/icons/outline/Location.svg";
   static const String send_outline = "assets/icons/outline/Send.svg";
 
+  static const String discovery_outline = "assets/icons/outline/Discovery.svg";
+  static const String paper_outline = "assets/icons/outline/Paper.svg";
+  static const String setting_outline = "assets/icons/outline/Setting.svg";
+
   static const String arrow_down_outline =
       "assets/icons/outline/Arrow_Down.svg";
   static const String arrow_left_outline =

@@ -1,11 +1,12 @@
-import 'package:app/controllers/auth/user_controller.dart';
-import 'package:app/models/user.dart';
+import 'package:golivin/controllers/auth/user_controller.dart';
+import 'package:golivin/models/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/fonts.dart';
 import '../../../constants/icons.dart';
+import '../../../constants/strings.dart';
 import '../../../controllers/auth/auth_controller.dart';
 import '../components/menu_component.dart';
 
@@ -74,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Container(
                   padding: EdgeInsets.only(bottom: 32),
                   child: Text(
-                    "0.0.1-beta",
+                    AppStrings.appVersion,
                     textAlign: TextAlign.center,
                     style: FontFamily.regular.copyWith(
                       color: AppColors.text,
@@ -83,6 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+              SizedBox(height: 24),
             ],
           ),
         ),
@@ -97,29 +99,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           InkWell(
             child: menuComponent(
-              "Privacy & Setting",
-              AppIcons.location_outline,
+              "Profile Info",
+              AppIcons.profile_outline,
             ),
             onTap: () {},
           ),
           InkWell(
             child: menuComponent(
-              "Privacy & Setting",
-              AppIcons.location_outline,
-            ),
-            onTap: () {},
-          ),
-          InkWell(
-            child: menuComponent(
-              "Privacy & Setting",
-              AppIcons.location_outline,
+              "Settings",
+              AppIcons.setting_outline,
             ),
             onTap: () {},
           ),
           InkWell(
             child: menuComponent(
               "Go Points",
-              AppIcons.star,
+              AppIcons.discovery_outline,
+            ),
+            onTap: () {},
+          ),
+          InkWell(
+            child: menuComponent(
+              "Terms & Condition",
+              AppIcons.paper_outline,
             ),
             onTap: () {},
           ),

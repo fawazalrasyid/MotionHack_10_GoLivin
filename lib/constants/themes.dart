@@ -1,4 +1,4 @@
-import 'package:app/constants/colors.dart';
+import 'package:golivin/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 final ThemeData themeData = ThemeData(

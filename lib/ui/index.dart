@@ -1,7 +1,7 @@
-import 'package:app/constants/icons.dart';
-import 'package:app/ui/order/views/my_order.dart';
-import 'package:app/ui/profile/views/profile.dart';
-import 'package:app/ui/wishlist/views/wishlist.dart';
+import 'package:golivin/constants/icons.dart';
+import 'package:golivin/ui/order/views/my_order.dart';
+import 'package:golivin/ui/profile/views/profile.dart';
+import 'package:golivin/ui/wishlist/views/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

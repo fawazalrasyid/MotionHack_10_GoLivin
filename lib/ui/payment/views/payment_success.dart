@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:app/constants/lottie.dart';
+import 'package:golivin/constants/lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -21,8 +21,9 @@ class _PaymentSuccessScreenState extends State<PaymentSuccessScreen> {
   navigateToHome() async {
     Timer(
       Duration(seconds: 2),
-      () => Navigator.of(context).pushReplacementNamed(
+      () => Navigator.of(context).pushNamedAndRemoveUntil(
         Routes.index,
+        (Route<dynamic> route) => false,
       ),
     );
   }

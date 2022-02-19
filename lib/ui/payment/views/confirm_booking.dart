@@ -1,7 +1,7 @@
-import 'package:app/ui/payment/views/payment_option.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:golivin/ui/payment/views/payment_option.dart';
 
 import '../../../constants/colors.dart';
 import '../../../constants/fonts.dart';

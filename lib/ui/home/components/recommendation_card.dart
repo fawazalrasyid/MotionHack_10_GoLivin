@@ -1,6 +1,6 @@
-import 'package:app/constants/colors.dart';
-import 'package:app/constants/fonts.dart';
-import 'package:app/constants/icons.dart';
+import 'package:golivin/constants/colors.dart';
+import 'package:golivin/constants/fonts.dart';
+import 'package:golivin/constants/icons.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
