@@ -88,24 +88,30 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  children: [
-                                    Text(
-                                      "${widget.buildingData!.buildingName} Regular Room",
-                                      style: FontFamily.regular.copyWith(
-                                        color: AppColors.text,
-                                        fontSize: 14,
+                                Expanded(
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${widget.buildingData!.buildingName} Regular Room ",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: FontFamily.regular.copyWith(
+                                            color: AppColors.text,
+                                            fontSize: 14,
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(width: 8),
-                                    Text(
-                                      "x1 month ",
-                                      style: FontFamily.regular.copyWith(
-                                        color: AppColors.greyText,
-                                        fontSize: 14,
+                                      SizedBox(width: 8),
+                                      Text(
+                                        "x1 month ",
+                                        style: FontFamily.regular.copyWith(
+                                          color: AppColors.greyText,
+                                          fontSize: 14,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      SizedBox(width: 8),
+                                    ],
+                                  ),
                                 ),
                                 Text(
                                   "IDR ${widget.buildingData!.price}",
@@ -116,6 +122,7 @@ class _ConfirmBookingScreenState extends State<ConfirmBookingScreen> {
                                 ),
                               ],
                             ),
+                            SizedBox(height: 8),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
