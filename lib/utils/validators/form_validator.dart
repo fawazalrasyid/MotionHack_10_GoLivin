@@ -6,9 +6,15 @@ class FormValidator {
   }
 
   static String? validatePhoneNumber(String value) {
-    return Helpers.isEmptyString(value)
-        ? 'Password field must be filled'
-        : null;
+    if (Helpers.isEmptyString(value)) {
+      return 'Phone number field must be filled';
+    }
+
+    if (!Helpers.isNumberString(value)) {
+      return 'Must be a valid phone number';
+    }
+
+    return null;
   }
 
   static String? validateEmail(String value) {
