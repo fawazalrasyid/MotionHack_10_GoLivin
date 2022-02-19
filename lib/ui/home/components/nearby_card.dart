@@ -13,9 +13,9 @@ Container nearbyCard(
   String image,
 ) {
   return Container(
-    margin: EdgeInsets.only(
-      left: 24,
-    ),
+    // margin: EdgeInsets.only(
+    //   left: 24,
+    // ),
     height: 100,
     width: 280,
     child: Stack(

@@ -275,12 +275,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             },
-            child: nearbyCard(
-              "${nearbyBuilding[index]?.buildingName}",
-              "${nearbyBuilding[index]?.city}",
-              "IDR ${nearbyBuilding[index]?.price}",
-              "${nearbyBuilding[index]?.rating}",
-              "${nearbyBuilding[index]?.imgThumbnail}",
+            child: Container(
+              margin: index == 0
+                  ? EdgeInsets.only(left: 24)
+                  : index == nearbyBuilding.length - 1
+                      ? EdgeInsets.only(left: 24, right: 24)
+                      : EdgeInsets.only(left: 24),
+              child: nearbyCard(
+                "${nearbyBuilding[index]?.buildingName}",
+                "${nearbyBuilding[index]?.city}",
+                "IDR ${nearbyBuilding[index]?.price}",
+                "${nearbyBuilding[index]?.rating}",
+                "${nearbyBuilding[index]?.imgThumbnail}",
+              ),
             ),
           );
         },
