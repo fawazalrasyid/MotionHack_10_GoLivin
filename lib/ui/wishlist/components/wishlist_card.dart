@@ -85,11 +85,14 @@ Container wishlistCard(
                           ),
                         ],
                       ),
-                      SvgPicture.asset(
-                        AppIcons.bookmark,
-                        height: 20,
-                        color: AppColors.iconGrey,
-                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: SvgPicture.asset(
+                          AppIcons.bookmark,
+                          height: 20,
+                          color: AppColors.iconGrey,
+                        ),
+                      )
                     ],
                   ),
                 ),

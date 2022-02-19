@@ -26,8 +26,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
   }
 
-  Future<void> getCurrentUserData() async {
-    user = await userC.getCurrentUser();
+  void getCurrentUserData() async {
+    final res = await userC.getCurrentUser();
+    setState(() {
+      user = res;
+    });
   }
 
   @override

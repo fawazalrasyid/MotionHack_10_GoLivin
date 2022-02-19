@@ -8,6 +8,7 @@ class Building {
     required this.province,
     required this.city,
     required this.district,
+    required this.buildingDesc,
   });
 
   final int id;
@@ -18,6 +19,7 @@ class Building {
   final String province;
   final String city;
   final String district;
+  final String buildingDesc;
 
   Building.fromJson(Map<String, Object?> json)
       : this(
@@ -33,6 +35,9 @@ class Building {
           province: json['province'] == null ? "" : json['province'] as String,
           city: json['city'] == null ? "" : json['city'] as String,
           district: json['district'] == null ? "" : json['district'] as String,
+          buildingDesc: json['buildingDesc'] == null
+              ? ""
+              : json['buildingDesc'] as String,
         );
 
   Map<String, Object?> toJson() {
@@ -45,6 +50,7 @@ class Building {
       'province': province,
       'city': city,
       'district': district,
+      'buildingDesc': buildingDesc,
     };
   }
 }
