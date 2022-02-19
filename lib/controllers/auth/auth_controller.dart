@@ -1,7 +1,9 @@
+import 'package:app/constants/fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
 import '../../utils/routes/routes.dart';
 
 class AuthController {
@@ -39,14 +41,18 @@ class AuthController {
       }
 
       Navigator.of(context).pushNamedAndRemoveUntil(
-        Routes.login,
+        Routes.register_succes,
         (Route<dynamic> route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
+      if (e.code == 'email-already-in-use') {
+        _showDialog(context, 'The account already exists for that email');
+
         print('The account already exists for that email.');
+      } else if (e.code == 'weak-password') {
+        _showDialog(context, 'The password provided is too weak');
+
+        print('The password provided is too weak.');
       }
     } catch (e) {
       print(e);
@@ -93,8 +99,12 @@ class AuthController {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
+        _showDialog(context, 'No user found');
+
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
+        _showDialog(context, 'Wrong password provided');
+
         print('Wrong password provided for that user.');
       }
     }
@@ -106,6 +116,43 @@ class AuthController {
     Navigator.of(context).pushNamedAndRemoveUntil(
       Routes.login,
       (Route<dynamic> route) => false,
+    );
+  }
+
+  void _showDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Oops...',
+            style: FontFamily.semiBold.copyWith(
+              color: AppColors.text,
+              fontSize: 18,
+            ),
+          ),
+          content: Text(
+            message,
+            style: FontFamily.regular.copyWith(
+              color: AppColors.text,
+              fontSize: 16,
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Close',
+                style: FontFamily.semiBold.copyWith(
+                  fontSize: 16,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
