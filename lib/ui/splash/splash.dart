@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../constants/assets.dart';
 import '../../constants/fonts.dart';
-import '../../controllers/auth/user_controller.dart';
 import '../../utils/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -42,7 +41,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Timer(
         Duration(seconds: 3),
         () => Navigator.of(context).pushNamedAndRemoveUntil(
-          Routes.login,
+          Routes.index,
           (Route<dynamic> route) => false,
         ),
       );

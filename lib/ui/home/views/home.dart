@@ -1,5 +1,6 @@
 import 'package:app/constants/icons.dart';
 import 'package:app/models/building.dart';
+import 'package:app/ui/detail/views/detail.dart';
 import 'package:app/ui/home/components/recommendation_card.dart';
 import 'package:app/ui/home/components/nearby_card.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Hello, ${user?.displayName}!",
+            "Hello, ${user?.displayName ?? ""}!",
             style: FontFamily.medium.copyWith(
               color: AppColors.greyText,
               fontSize: 18,
@@ -248,12 +249,24 @@ class _HomeScreenState extends State<HomeScreen> {
         scrollDirection: Axis.horizontal,
         itemCount: nearbyBuilding.length,
         itemBuilder: (context, index) {
-          return nearbyCard(
-            "${nearbyBuilding[index]?.buildingName}",
-            "${nearbyBuilding[index]?.city}",
-            "IDR ${nearbyBuilding[index]?.price}",
-            "${nearbyBuilding[index]?.rating}",
-            "${nearbyBuilding[index]?.imgThumbnail}",
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(
+                    buildingData: nearbyBuilding[index],
+                  ),
+                ),
+              );
+            },
+            child: nearbyCard(
+              "${nearbyBuilding[index]?.buildingName}",
+              "${nearbyBuilding[index]?.city}",
+              "IDR ${nearbyBuilding[index]?.price}",
+              "${nearbyBuilding[index]?.rating}",
+              "${nearbyBuilding[index]?.imgThumbnail}",
+            ),
           );
         },
       ),
@@ -270,12 +283,27 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         itemCount: recommendationBuilding.length,
         itemBuilder: (context, index) {
-          return recommendationCard(
-            "${recommendationBuilding[index]?.buildingName}",
-            "${recommendationBuilding[index]?.city}",
-            "IDR ${recommendationBuilding[index]?.price}",
-            "${recommendationBuilding[index]?.rating}",
-            "${recommendationBuilding[index]?.imgThumbnail}",
+          return InkWell(
+            splashColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailScreen(
+                    buildingData: recommendationBuilding[index],
+                  ),
+                ),
+              );
+            },
+            child: recommendationCard(
+              "${recommendationBuilding[index]?.buildingName}",
+              "${recommendationBuilding[index]?.city}",
+              "IDR ${recommendationBuilding[index]?.price}",
+              "${recommendationBuilding[index]?.rating}",
+              "${recommendationBuilding[index]?.imgThumbnail}",
+            ),
           );
         },
       ),

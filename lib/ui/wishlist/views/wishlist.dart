@@ -50,7 +50,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: 5,
+        itemCount: 3,
         itemBuilder: (context, index) {
           return wishlistCard(
             "Kost Omah ${index}",
