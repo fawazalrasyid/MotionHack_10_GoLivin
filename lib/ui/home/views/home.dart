@@ -1,5 +1,6 @@
 import 'package:app/constants/icons.dart';
 import 'package:app/models/building.dart';
+import 'package:app/ui/building/views/list_building.dart';
 import 'package:app/ui/detail/views/detail.dart';
 import 'package:app/ui/home/components/recommendation_card.dart';
 import 'package:app/ui/home/components/nearby_card.dart';
@@ -13,6 +14,7 @@ import '../../../controllers/auth/user_controller.dart';
 import '../../../controllers/building/nearby_controller.dart';
 import '../../../controllers/building/recommendation_controller.dart';
 import '../../../models/user.dart';
+import '../controllers/home_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final userC = UserController();
   final nearbyC = NearbyController();
   final recommendationC = RecommendationController();
+  final homeC = HomeController();
 
   UserM? user;
   List<Building?> nearbyBuilding = List<Building>.empty(growable: true);
@@ -144,6 +147,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 24),
       child: TextField(
+        controller: homeC.searchC,
+        onChanged: (string) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ListBuildingScreen(keyword: string),
+            ),
+          );
+
+          homeC.searchC.clear();
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
         textInputAction: TextInputAction.search,
         decoration: InputDecoration(
           border: OutlineInputBorder(
